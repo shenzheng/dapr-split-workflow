@@ -1,0 +1,26 @@
+# dapr.yaml
+version: 1
+apps:
+  - appID: order-activities
+    appDirPath: ./OrderProcessActivities
+    appPort: 5102
+    appProtocol: http
+    command: ["dotnet", "run"]
+    env:
+      ASPNETCORE_URLS: "http://localhost:5102"
+    appHealthCheckPath: /healthz
+    resourcesPath: ../components
+    daprHTTPPort: 3511
+    daprGRPCPort: 50111
+
+  - appID: order-workflow
+    appDirPath: ./OrderProcessorMainWorkflow
+    appPort: 5101
+    appProtocol: http
+    command: ["dotnet", "run"]
+    env:
+      ASPNETCORE_URLS: "http://localhost:5101"
+    appHealthCheckPath: /healthz
+    resourcesPath: ../components
+    daprHTTPPort: 3510
+    daprGRPCPort: 50110
